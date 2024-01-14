@@ -7,12 +7,17 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8081';
 
   constructor(private http: HttpClient) {}
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.apiUrl}/tasks`);
   }
+
+  addTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(`${this.apiUrl}/tasks/{id}`, task);
+  }
+
 
  }
